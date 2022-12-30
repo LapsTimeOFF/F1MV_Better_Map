@@ -1,0 +1,12 @@
+{
+  "name": "F1MV_Better_Map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/electron.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "LapsTimeOFf, MR. Ajeko, JJWatMyself, TheBaconCat",
+  "license": "ISC"
+}
