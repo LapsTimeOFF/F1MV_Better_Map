@@ -20,6 +20,7 @@ specifiers:
   eslint-plugin-import: ^2.26.0
   fork-ts-checker-webpack-plugin: ^7.2.14
   node-loader: ^2.0.0
+  npm_f1mv_api: ^1.1.1
   style-loader: ^3.3.1
   ts-loader: ^9.4.2
   ts-node: ^10.9.1
@@ -28,6 +29,7 @@ specifiers:
 
 dependencies:
   electron-squirrel-startup: 1.0.0
+  npm_f1mv_api: 1.1.1
 
 devDependencies:
   '@electron-forge/cli': 6.0.4
@@ -4338,7 +4340,6 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
-    dev: true
 
   /node-forge/1.3.1:
     resolution: {integrity: sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==}
@@ -4424,6 +4425,14 @@ packages:
     dependencies:
       path-key: 3.1.1
     dev: true
+
+  /npm_f1mv_api/1.1.1:
+    resolution: {integrity: sha512-KnjGEZDfoyavPjEKjM84pj8CgjjdCsBzlYWQ3z4mW0ZSZ91NTGTuBfFT1Wu3YbeAEfxoh5Vl0mAx2CM+VxUVcA==}
+    dependencies:
+      node-fetch: 2.6.7
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /npmlog/6.0.2:
     resolution: {integrity: sha512-/vBvz5Jfr9dT/aFWd0FIRf+T/Q2WBsLENygUaFUqstqsycmZAP/t5BvFJTK0viFmSUxiUKTUplWy5vt+rvKIxg==}
@@ -5722,7 +5731,6 @@ packages:
 
   /tr46/0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
-    dev: true
 
   /trim-repeated/1.0.0:
     resolution: {integrity: sha512-pkonvlKk8/ZuR0D5tLW8ljt5I8kmxp2XKymhepUeOdCEfKpZaktSArkLHZt76OB1ZvO9bssUsDty4SWhLvZpLg==}
@@ -5966,7 +5974,6 @@ packages:
 
   /webidl-conversions/3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
-    dev: true
 
   /webpack-dev-middleware/5.3.3_webpack@5.75.0:
     resolution: {integrity: sha512-hj5CYrY0bZLB+eTO+x/j67Pkrquiy7kWepMHmUMoPsmcUaeEnQJqFzHJOyxgWlq746/wUuA64p9ta34Kyb01pA==}
@@ -6102,7 +6109,6 @@ packages:
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
-    dev: true
 
   /which-boxed-primitive/1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

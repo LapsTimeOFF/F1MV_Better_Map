@@ -7,10 +7,25 @@ import { rendererConfig } from "./webpack.renderer.config";
 const config: ForgeConfig = {
     packagerConfig: {},
     rebuildConfig: {},
-    makers: [],
+    makers: [
+        {
+            name: "@electron-forge/maker-dmg",
+            config: {
+                format: "ULFO",
+            },
+        },
+        {
+            name: "@electron-forge/maker-zip",
+            platforms: ["windows", "linux"],
+            config: {
+                // Config here
+            },
+        },
+    ],
     plugins: [
         new WebpackPlugin({
             mainConfig,
+            devContentSecurityPolicy: "connect-src 'self' * 'unsafe-eval'",
             renderer: {
                 config: rendererConfig,
                 entryPoints: [
