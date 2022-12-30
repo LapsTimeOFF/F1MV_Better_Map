@@ -1,12 +1,19 @@
 {
-  "name": "F1MV_Better_Map",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/electron.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "LapsTimeOFf, MR. Ajeko, JJWatMyself, TheBaconCat",
-  "license": "ISC"
+    "name": "F1MV_Better_Map",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/electron.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "LapsTimeOFf, MR. Ajeko, JJWatMyself, TheBaconCat",
+    "license": "ISC",
+    "devDependencies": {
+        "electron-builder": "^23.6.0"
+    },
+    "dependencies": {
+        "electron": "^22.0.0",
+        "npm_f1mv_api": "^1.1.1"
+    }
 }
