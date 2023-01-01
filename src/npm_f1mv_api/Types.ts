@@ -59,15 +59,54 @@ type DriverList = {
 type Position = {
     Position: Array<{
         Timestamp: string;
-        Entries: object
-    }>
-}
+        Entries: object;
+    }>;
+};
 
 type Driver_Position = {
     Status: "OnTrack";
     X: number;
     Y: number;
     Z: number;
+};
+
+type Driver_TimingData = {
+    GapToLeader: string;
+    Line: number;
+    Position: string;
+    ShowPosition: boolean;
+    RacingNumber: string;
+    Retired: boolean;
+    InPit: boolean;
+    PitOut: boolean;
+    Stopped: boolean;
+    Status: number;
+    NumberOfLaps: number;
+    NumberOfPitStops: number;
+};
+
+enum TrackStatus_Def {
+    "AllClear"="1",
+    "Yellow"="2",
+    "SCDeployed"="4",
+    "Red"="5",
+    "VSCDeployed"="6",
+    "VSCEnding"="7",
 }
 
-export { Config, Topic, ClockTopic, DriverList, Driver_Position, Position };
+type TrackStatus = {
+    Status: "1" | "2" | "4" | "5" | "6" | "7";
+    Message: "AllClear" | "Yellow" | "SCDeployed" | "Red" | "VSCDeployed" | "VSCEnding";
+};
+
+export {
+    Config,
+    Topic,
+    ClockTopic,
+    DriverList,
+    Driver_Position,
+    Position,
+    Driver_TimingData,
+    TrackStatus,
+    TrackStatus_Def
+};

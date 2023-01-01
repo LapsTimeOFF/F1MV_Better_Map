@@ -1,14 +1,24 @@
-import { ClockTopic, Config, DriverList, Driver_Position, Position, Topic } from './Types';
-import { getF1MVVersion, getAPIVersion } from './getVersion';
-import { discoverF1MVInstances } from './discoverF1MVInstances';
+import {
+    ClockTopic,
+    Config,
+    DriverList,
+    Driver_Position,
+    Driver_TimingData,
+    Position,
+    Topic,
+    TrackStatus,
+    TrackStatus_Def,
+} from "./Types";
+import { getF1MVVersion, getAPIVersion } from "./getVersion";
+import { discoverF1MVInstances } from "./discoverF1MVInstances";
 import {
     LiveTimingAPIGraphQL,
     LiveTimingAPIV1,
     LiveTimingAPIV2,
     LiveTimingClockAPIGraphQL,
-} from './apiCall';
-import { testConnection } from './connection';
-import { noInstanceFounded, invalidTopic } from './Errors';
+} from "./apiCall";
+import { testConnection } from "./connection";
+import { noInstanceFounded, invalidTopic } from "./Errors";
 
 export {
     Config,
@@ -17,6 +27,9 @@ export {
     DriverList,
     Position,
     Driver_Position,
+    Driver_TimingData,
+    TrackStatus,
+    TrackStatus_Def,
     getAPIVersion,
     getF1MVVersion,
     discoverF1MVInstances,

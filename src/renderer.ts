@@ -66,9 +66,6 @@ import * as Sentry from "@sentry/electron";
     };
 
     // Generate SVGs
-
-    const width = "100vw";
-    const height = "100vh";
     const svg = d3.select("#svg");
 
     // Generate drivers point
@@ -76,5 +73,5 @@ import * as Sentry from "@sentry/electron";
 
     // Update drivers postition
     await updatePosition(config);
-    setInterval(() => updatePosition(config), 100);
+    setInterval(() => updatePosition(config), 800);
 })();

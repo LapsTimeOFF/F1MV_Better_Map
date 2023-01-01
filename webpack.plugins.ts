@@ -21,7 +21,8 @@ export const plugins = [
         // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
         // and needs the `project:releases` and `org:read` scopes
         authToken: process.env.SENTRY_AUTH_TOKEN,
-        urlPrefix: 'webpack-internal:///./src/'
+        urlPrefix: 'webpack-internal:///./src/',
+        
 
         // Optionally uncomment the line below to override automatic release name detection
         // release: process.env.RELEASE,
