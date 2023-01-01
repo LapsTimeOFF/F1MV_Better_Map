@@ -72,10 +72,12 @@ const d3 = require("d3");
         .append("svg")
         .attr("id", "VER")
         .attr("viewBox", "-10.00 -10.00 20 20")
-        .attr("x", -3356)
-        .attr("y", -2424)
+        .attr("x", 8600)
+        // .attr("y", 689 - 1871.57138611)
+        .attr("y", 689)
         .attr("width", 590)
         .attr("height", 590);
+    
 
     car_svg
         .append("circle")
