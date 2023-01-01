@@ -7,7 +7,7 @@ export async function discoverF1MVInstances(host: string) {
     let instanceFounded = false;
 
     for (let _i = basePort; _i < 10111; _i++) {
-        let newConfig: Config = { host: host, port: _i };
+        const newConfig: Config = { host: host, port: _i };
         if ((await testConnection(newConfig)) !== false) {
             basePort = _i;
             instanceFounded = true;
