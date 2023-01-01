@@ -11,6 +11,10 @@ if (require("electron-squirrel-startup")) {
     app.quit();
 }
 
+import * as Sentry from '@sentry/electron/main';
+
+Sentry.init({ dsn: "https://54929c18168e4ba8b17993f0faa2313e@o4504430679883776.ingest.sentry.io/4504430682898432" });
+
 const createWindow = (): void => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({

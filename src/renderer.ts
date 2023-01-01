@@ -36,8 +36,13 @@ import {
 import { generateDrivers, updatePosition } from "./graphics";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const d3 = require("d3");
+import * as Sentry from "@sentry/electron";
 
 (async () => {
+
+    Sentry.init({
+        dsn: "https://54929c18168e4ba8b17993f0faa2313e@o4504430679883776.ingest.sentry.io/4504430682898432",
+    });
     console.log(
         '👋 This message is being logged by "renderer.js", included via webpack'
     );
