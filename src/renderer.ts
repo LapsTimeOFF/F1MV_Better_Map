@@ -28,8 +28,12 @@
 
 import "./index.css";
 import $ from "jquery";
-import { discoverF1MVInstances, noInstanceFounded } from "./npm_f1mv_api";
-import { TeamColors } from "./teamColors";
+import {
+    Config,
+    discoverF1MVInstances,
+    noInstanceFounded,
+} from "./npm_f1mv_api";
+import { generateDrivers, updatePosition } from "./graphics";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const d3 = require("d3");
 
@@ -51,47 +55,21 @@ const d3 = require("d3");
     if (!instances) return;
     console.log(instances);
 
-    $("#foundInstance").text(JSON.stringify(instances));
+    const config: Config = {
+        host: "localhost",
+        port: instances.port,
+    };
+
+    // Generate SVGs
 
     const width = "100vw";
     const height = "100vh";
-    const svg = d3
-        .select("#svgcontainer")
-        .append("svg")
-        .attr(
-            "viewBox",
-            "-4900.6251271128185 -1507.5285782390943 15996.510706256171 6869.783054289148"
-        )
-        .attr("display", "block")
-        .attr("width", width)
-        .attr("height", height);
+    const svg = d3.select("#svg");
 
-    const g_cars = svg.append("g").attr("id", "cars");
+    // Generate drivers point
+    await generateDrivers(config, svg);
 
-    const car_svg = g_cars
-        .append("svg")
-        .attr("id", "VER")
-        .attr("viewBox", "-10.00 -10.00 20 20")
-        .attr("x", 8600)
-        // .attr("y", 689 - 1871.57138611)
-        .attr("y", 689)
-        .attr("width", 590)
-        .attr("height", 590);
-    
-
-    car_svg
-        .append("circle")
-        .attr("cx", 0)
-        .attr("cy", 0)
-        .attr("r", 10)
-        .attr("fill", `#${TeamColors["Red Bull Racing"]}`);
-
-    car_svg
-        .append("text")
-        .text("VER")
-        .attr("cx", 0)
-        .attr("cy", 0)
-        .attr("dy", `0.35em`)
-        .attr("class", `driver-text`)
-        .attr("fill", `#fff`);
+    // Update drivers postition
+    await updatePosition(config);
+    setInterval(() => updatePosition(config), 100);
 })();

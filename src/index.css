@@ -17,10 +17,15 @@ body {
     font-family: "Exo 2Variable", sans-serif;
     font-weight: 800;
     text-anchor: middle;
+    transform: scale(1, -1)
 }
 
 svg:not(:root) {
     overflow: hidden;
+}
+
+#track {
+    transform: rotate(0deg);
 }
 
 html {

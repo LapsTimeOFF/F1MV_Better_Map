@@ -1,4 +1,4 @@
-import { ClockTopic, Config, Topic } from './Types';
+import { ClockTopic, Config, DriverList, Driver_Position, Position, Topic } from './Types';
 import { getF1MVVersion, getAPIVersion } from './getVersion';
 import { discoverF1MVInstances } from './discoverF1MVInstances';
 import {
@@ -14,6 +14,9 @@ export {
     Config,
     Topic,
     ClockTopic,
+    DriverList,
+    Position,
+    Driver_Position,
     getAPIVersion,
     getF1MVVersion,
     discoverF1MVInstances,

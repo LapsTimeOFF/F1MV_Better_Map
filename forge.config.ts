@@ -25,7 +25,7 @@ const config: ForgeConfig = {
     plugins: [
         new WebpackPlugin({
             mainConfig,
-            devContentSecurityPolicy: "connect-src 'self' * 'unsafe-eval'",
+            devContentSecurityPolicy: "connect-src 'self' * sentry-ipc:",
             renderer: {
                 config: rendererConfig,
                 entryPoints: [
@@ -40,6 +40,7 @@ const config: ForgeConfig = {
                 ],
             },
         }),
+        
     ],
 };
 
