@@ -33,7 +33,7 @@ import {
     discoverF1MVInstances,
     noInstanceFounded,
 } from "./npm_f1mv_api";
-import { generateDrivers, updatePosition } from "./graphics";
+import { generateDrivers, ringManagment, updatePosition } from "./graphics";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const d3 = require("d3");
 import * as Sentry from "@sentry/electron";
@@ -74,4 +74,7 @@ import * as Sentry from "@sentry/electron";
     // Update drivers postition
     await updatePosition(config);
     setInterval(() => updatePosition(config), 800);
+    
+    await ringManagment(config);
+    setInterval(() => ringManagment(config), 800);
 })();

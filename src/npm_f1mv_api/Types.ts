@@ -85,18 +85,31 @@ type Driver_TimingData = {
     NumberOfPitStops: number;
 };
 
+type RaceControlMessage = {
+    Utc: string;
+    Lap: number;
+    Category: "Flag" | "Other" | "Drs" | "CarEvent" | "SafetyCar";
+    Message: string;
+};
+
 enum TrackStatus_Def {
-    "AllClear"="1",
-    "Yellow"="2",
-    "SCDeployed"="4",
-    "Red"="5",
-    "VSCDeployed"="6",
-    "VSCEnding"="7",
+    "AllClear" = "1",
+    "Yellow" = "2",
+    "SCDeployed" = "4",
+    "Red" = "5",
+    "VSCDeployed" = "6",
+    "VSCEnding" = "7",
 }
 
 type TrackStatus = {
     Status: "1" | "2" | "4" | "5" | "6" | "7";
-    Message: "AllClear" | "Yellow" | "SCDeployed" | "Red" | "VSCDeployed" | "VSCEnding";
+    Message:
+        | "AllClear"
+        | "Yellow"
+        | "SCDeployed"
+        | "Red"
+        | "VSCDeployed"
+        | "VSCEnding";
 };
 
 export {
@@ -108,5 +121,6 @@ export {
     Position,
     Driver_TimingData,
     TrackStatus,
-    TrackStatus_Def
+    TrackStatus_Def,
+    RaceControlMessage,
 };

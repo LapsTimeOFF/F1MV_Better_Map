@@ -4,7 +4,7 @@ import {
     Driver_Position,
     Driver_TimingData,
     LiveTimingAPIGraphQL,
-    Position,
+    RaceControlMessage,
     TrackStatus,
     TrackStatus_Def,
 } from "./npm_f1mv_api";
@@ -38,9 +38,10 @@ export async function generateDrivers(config: Config, svg: any) {
 
         car_svg
             .append("circle")
+            .attr("id", `circle${driver.Tla}`)
             .attr("cx", 0)
             .attr("cy", 0)
-            .attr("r", 10)
+            .attr("r", 7.5)
             .attr("fill", `#${TeamColors[driver.TeamName]}`);
 
         car_svg
@@ -109,7 +110,7 @@ export async function updatePosition(config: Config) {
                     .append("circle")
                     .attr("cx", 0)
                     .attr("cy", 0)
-                    .attr("r", 10)
+                    .attr("r", 7.5)
                     .attr("fill", `#ffeb3b`);
 
                 car_svg
@@ -124,6 +125,7 @@ export async function updatePosition(config: Config) {
                 sc_spawned = true;
             }
 
+            d3.select(`#SC`).attr("opacity", 1);
             d3.select(`#SC`).attr("x", driver.X - 400);
             d3.select(`#SC`).attr("y", driver.Y - 400);
 
@@ -159,6 +161,58 @@ export async function updatePosition(config: Config) {
             console.error(
                 `Failed to edit driver point for Driver number ${key}`
             );
+        }
+    }
+}
+
+export async function ringManagment(config: Config) {
+    const { TimingData, DriverList, RaceControlMessages } =
+        await LiveTimingAPIGraphQL(config, [
+            "TimingData",
+            "DriverList",
+            "RaceControlMessages",
+        ]);
+
+    for (const key in TimingData.Lines) {
+        const driverInData: Driver_TimingData = TimingData.Lines[key];
+        const driverInList: DriverList = DriverList[key];
+        const lapped = driverInData.GapToLeader.endsWith("L");
+
+        if (lapped) {
+            d3.select(`#circle${driverInList.Tla}`).attr("class", "lapped");
+            for (let _i = 0; _i < 4; _i++) {
+                const message: RaceControlMessage =
+                    RaceControlMessages.Messages[
+                        RaceControlMessages.Messages.length - (1 + _i)
+                    ];
+
+                if (
+                    message.Message.includes(
+                        "LAPPED CARS MAY NOW OVERTAKE THE SAFETY CAR"
+                    )
+                ) {
+                    const messageArray = message.Message.split(":");
+                    const allowedDriversToOvertake = messageArray[1].split(",");
+
+                    if (
+                        allowedDriversToOvertake.includes(
+                            ` ${driverInList.RacingNumber}`
+                        )
+                    ) {
+                        d3.select(`#circle${driverInList.Tla}`).attr(
+                            "class",
+                            "lapped blink"
+                        );
+                    }
+                }
+                break;
+            }
+        } else {
+            if (driverInData.Line === 1) {
+                d3.select(`#circle${driverInList.Tla}`).attr("class", "first");
+            } else {
+                d3.select(`#circle${driverInList.Tla}`).attr("class", "");
+            }
         }
     }
 }
