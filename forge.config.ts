@@ -9,16 +9,14 @@ const config: ForgeConfig = {
     rebuildConfig: {},
     makers: [
         {
+            name: "@electron-forge/maker-zip",
+            platforms: ["win32", "linux"],
+            config: {}
+        },
+        {
             name: "@electron-forge/maker-dmg",
             config: {
                 format: "ULFO",
-            },
-        },
-        {
-            name: "@electron-forge/maker-zip",
-            platforms: ["windows", "linux"],
-            config: {
-                // Config here
             },
         },
     ],
