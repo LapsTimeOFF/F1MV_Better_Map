@@ -13,7 +13,7 @@ body {
 
 .driver-text {
     user-select: none;
-    font-size: 8px;
+    font-size: 6px;
     font-family: "Exo 2Variable", sans-serif;
     font-weight: 800;
     text-anchor: middle;
@@ -32,4 +32,30 @@ html {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     text-size-adjust: 100%;
+}
+
+.lapped {
+    stroke: white;
+    stroke-width: 2;
+}
+
+.first {
+    stroke: yellow;
+    stroke-width: 2;
+}
+
+.blink {
+    animation: blink 0.5s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        stroke-width: 2;
+    }
+    50% {
+        stroke-width: 1;
+    }
+    100% {
+        stroke-width: 0;
+    }
 }
