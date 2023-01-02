@@ -11,20 +11,20 @@ export const plugins = [
     new ForkTsCheckerWebpackPlugin({
         logger: "webpack-infrastructure",
     }),
-    new SentryWebpackPlugin({
-        org: "lapstime",
-        project: "electron",
+    // new SentryWebpackPlugin({
+    //     org: "lapstime",
+    //     project: "electron",
 
-        // Specify the directory containing build artifacts
-        include: ".webpack/main/",
+    //     // Specify the directory containing build artifacts
+    //     include: ".webpack/main/",
 
-        // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
-        // and needs the `project:releases` and `org:read` scopes
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-        urlPrefix: 'webpack-internal:///./src/',
+    //     // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
+    //     // and needs the `project:releases` and `org:read` scopes
+    //     authToken: process.env.SENTRY_AUTH_TOKEN,
+    //     urlPrefix: 'webpack-internal:///./src/',
         
 
-        // Optionally uncomment the line below to override automatic release name detection
-        // release: process.env.RELEASE,
-    }),
+    //     // Optionally uncomment the line below to override automatic release name detection
+    //     // release: process.env.RELEASE,
+    // }),
 ];

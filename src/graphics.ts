@@ -161,3 +161,7 @@ export async function updatePosition(config: Config) {
         }
     }
 }
+
+export async function ringManagment(config: Config) {
+    const { TimingData } = await LiveTimingAPIGraphQL(config, ["TimingData"]);
+}
