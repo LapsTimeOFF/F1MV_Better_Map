@@ -4,7 +4,6 @@ import {
     Driver_Position,
     Driver_TimingData,
     LiveTimingAPIGraphQL,
-    Position,
     TrackStatus,
     TrackStatus_Def,
 } from "./npm_f1mv_api";
