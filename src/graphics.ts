@@ -42,7 +42,8 @@ export async function generateDrivers(config: Config, svg: any) {
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("r", 7.5)
-            .attr("fill", `#${TeamColors[driver.TeamName]}`);
+            // .attr("fill", `#${TeamColors[driver.TeamName]}`);
+            // .attr("style", "background-image: url(/blips/blip.png);");
 
         car_svg
             .append("text")
