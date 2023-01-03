@@ -7,13 +7,18 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require("electron-squirrel-startup")) {
-    app.quit();
-}
+if (process.env.npm_package_name)
+    if (require("electron-squirrel-startup")) {
+        app.quit();
+    }
 
-import * as Sentry from '@sentry/electron/main';
+console.log(process.env);
 
-Sentry.init({ dsn: "https://54929c18168e4ba8b17993f0faa2313e@o4504430679883776.ingest.sentry.io/4504430682898432" });
+import * as Sentry from "@sentry/electron/main";
+
+Sentry.init({
+    dsn: "https://54929c18168e4ba8b17993f0faa2313e@o4504430679883776.ingest.sentry.io/4504430682898432",
+});
 
 const createWindow = (): void => {
     // Create the browser window.
