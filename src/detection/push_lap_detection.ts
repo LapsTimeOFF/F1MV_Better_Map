@@ -117,10 +117,3 @@ export function isDriverOnPushLap(driverNumber: string) {
     // Return the final pushing state
     return isPushing;
 }
-
-apiRequests();
-for (const i in timingData) {
-    const name = driverList.LastName;
-
-    if (isDriverOnPushLap(i)) console.log(`${name} is pushing`);
-}

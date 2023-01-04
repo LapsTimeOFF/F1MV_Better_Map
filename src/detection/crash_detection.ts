@@ -155,10 +155,3 @@ export function overwriteCrashedStatus(racingNumber: string) {
 
     return false;
 }
-
-apiRequests();
-for (const i in timingData) {
-    const name = driverList.LastName;
-
-    if (driverHasCrashed(i)) console.log(`${name} has crashed`);
-}
