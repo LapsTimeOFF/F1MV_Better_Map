@@ -28,6 +28,9 @@ jobs:
         with:
           # Version of pnpm to install
           version: 7.21.0
+        
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Check the formating
         run: pnpm prettier
