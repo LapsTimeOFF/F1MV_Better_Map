@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   checking-format:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out Git repository
