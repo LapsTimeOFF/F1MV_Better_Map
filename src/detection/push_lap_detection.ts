@@ -10,6 +10,7 @@ let timingData: any;
 let bestTimes: any;
 let sessionInfo: any;
 let sessionType: any;
+let sessionStatus: any;
 
 // All the api requests
 async function apiRequests() {
@@ -33,6 +34,7 @@ async function apiRequests() {
     bestTimes = liveTimingState.TimingStats.Lines;
     sessionInfo = liveTimingState.SessionInfo;
     sessionType = sessionInfo.Type;
+    sessionStatus = liveTimingState.SessionStatus.Status;
 }
 
 // A lap or sector time can be send through and will return as a number in seconds
@@ -51,6 +53,7 @@ function parseLapOrSectorTime(time: string) {
 
 // Check if the driver is on a push lap or not
 function isDriverOnPushLap(driverNumber: string) {
+    if (sessionStatus === "Aborted") return false;
     const driverTimingData = timingData[driverNumber];
     const driverBestTimes = bestTimes[driverNumber];
 
