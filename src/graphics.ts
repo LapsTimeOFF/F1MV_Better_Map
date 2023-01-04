@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
     Config,
     DriverList,
@@ -9,6 +10,7 @@ import {
     TrackStatus_Def,
 } from "./npm_f1mv_api";
 import { TeamColors } from "./colors";
+// @ts-ignore
 import blip from "./blips/blip.png";
 import { driverHasCrashed } from "./detection/crash_detection";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
