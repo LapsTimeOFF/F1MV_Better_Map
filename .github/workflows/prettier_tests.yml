@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   checking-format:
-    runs-on: self-hosted
+    runs-on: ubuntu-lastest
 
     steps:
       - name: Check out Git repository
