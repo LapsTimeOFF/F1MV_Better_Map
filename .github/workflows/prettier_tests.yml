@@ -33,4 +33,4 @@ jobs:
         run: pnpm install
 
       - name: Check the formating
-        run: pnpm prettier
+        run: npx -y prettier --check "src/**/*.ts"
