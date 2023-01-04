@@ -167,13 +167,16 @@ export async function updatePosition(config: Config) {
 }
 
 export async function ringManagment(config: Config) {
-    const { TimingData, DriverList, RaceControlMessages } =
+    const { TimingData, DriverList, RaceControlMessages, SessionInfo } =
         await LiveTimingAPIGraphQL(config, [
             "TimingData",
             "DriverList",
             "RaceControlMessages",
+            "SessionInfo"
         ]);
 
+    if(SessionInfo.Type !== 'Race') return;
+    
     for (const key in TimingData.Lines) {
         const driverInData: Driver_TimingData = TimingData.Lines[key];
         const driverInList: DriverList = DriverList[key];
