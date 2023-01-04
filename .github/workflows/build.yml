@@ -3,6 +3,10 @@ name: Build/release
 on:
   push:
     branches: ['*']
+    paths:
+      - 'src/*'
+      - 'src/**/*'
+      - 'package.json'
 
 concurrency:
   group: "build"
