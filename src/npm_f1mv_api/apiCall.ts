@@ -1,5 +1,5 @@
-import { invalidTopic } from './Errors';
-import { ClockTopic, Config, Topic } from './Types';
+import { invalidTopic } from "./Errors";
+import { ClockTopic, Config, Topic } from "./Types";
 
 /**
  * Call the Live Timing on V1 [DEPRECATED]
@@ -37,7 +37,7 @@ export async function LiveTimingAPIV2(
     const data = await (
         await fetch(
             `http://${config.host}:${config.port}/api/v2/live-timing/state/${
-                typeof topic === 'object' ? topic.join(',') : topic
+                typeof topic === "object" ? topic.join(",") : topic
             }`
         )
     ).json();
@@ -62,20 +62,20 @@ export async function LiveTimingAPIGraphQL(
 ) {
     const { data } = await (
         await fetch(`http://${config.host}:${config.port}/api/graphql`, {
-            headers: { 'content-type': 'application/json' },
+            headers: { "content-type": "application/json" },
             body: JSON.stringify({
                 query: `query LiveTimingState {
                             liveTimingState {
                                 ${
-                                    typeof topic === 'object'
-                                        ? topic.join('\n')
+                                    typeof topic === "object"
+                                        ? topic.join("\n")
                                         : topic
                                 }
                             }
                         }`,
-                operationName: 'LiveTimingState',
+                operationName: "LiveTimingState",
             }),
-            method: 'POST',
+            method: "POST",
         })
     ).json();
 
@@ -99,20 +99,20 @@ export async function LiveTimingClockAPIGraphQL(
 ) {
     const { data } = await (
         await fetch(`http://${config.host}:${config.port}/api/graphql`, {
-            headers: { 'content-type': 'application/json' },
+            headers: { "content-type": "application/json" },
             body: JSON.stringify({
                 query: `query LiveTimingClock {
                             liveTimingClock {
                                 ${
-                                    typeof topic === 'object'
-                                        ? topic.join('\n')
+                                    typeof topic === "object"
+                                        ? topic.join("\n")
                                         : topic
                                 }
                             }
                         }`,
-                operationName: 'LiveTimingClock',
+                operationName: "LiveTimingClock",
             }),
-            method: 'POST',
+            method: "POST",
         })
     ).json();
 

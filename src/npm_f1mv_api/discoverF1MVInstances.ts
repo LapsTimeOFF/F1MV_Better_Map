@@ -1,6 +1,6 @@
-import { testConnection } from './connection';
-import { noInstanceFounded } from './Errors';
-import { Config } from './Types';
+import { testConnection } from "./connection";
+import { noInstanceFounded } from "./Errors";
+import { Config } from "./Types";
 
 export async function discoverF1MVInstances(host: string) {
     let basePort = 10101;
