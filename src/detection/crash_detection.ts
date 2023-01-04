@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Config, discoverF1MVInstances, LiveTimingAPIGraphQL} from "../npm_f1mv_api";
+import {
+    Config,
+    discoverF1MVInstances,
+    LiveTimingAPIGraphQL,
+} from "../npm_f1mv_api";
 
 let driverList: any;
 let carData: any;
@@ -37,7 +41,7 @@ async function apiRequests() {
     }
 }
 
-function driverHasCrashed(driverNumber: string) {
+export function driverHasCrashed(driverNumber: string) {
     const driverCarData = getCarData(driverNumber);
 
     if (!weirdCarBehaviour(driverCarData, driverNumber)) return false;
@@ -47,7 +51,7 @@ function driverHasCrashed(driverNumber: string) {
     return true;
 }
 
-function getCarData(driverNumber: string) {
+export function getCarData(driverNumber: string) {
     try {
         carData[0].Cars[driverNumber].Channels;
     } catch (error) {
@@ -56,7 +60,7 @@ function getCarData(driverNumber: string) {
     return carData[0].Cars[driverNumber].Channels;
 }
 
-function weirdCarBehaviour(driverCarData: any, racingNumber: string) {
+export function weirdCarBehaviour(driverCarData: any, racingNumber: string) {
     const driverTimingData = timingData[racingNumber];
 
     const rpm = driverCarData[0];
@@ -80,7 +84,7 @@ function weirdCarBehaviour(driverCarData: any, racingNumber: string) {
     );
 }
 
-function getSpeedThreshold() {
+export function getSpeedThreshold() {
     if (
         sessionType === "Qualifying" ||
         sessionType === "Practice" ||
@@ -95,7 +99,7 @@ function getSpeedThreshold() {
     return 30;
 }
 
-function overwriteCrashedStatus(racingNumber: string) {
+export function overwriteCrashedStatus(racingNumber: string) {
     const driverTimingData = timingData[racingNumber];
 
     if (driverTimingData.InPit === true) return true;
@@ -104,11 +108,16 @@ function overwriteCrashedStatus(racingNumber: string) {
 
     const lastSectorSegments = driverTimingData.Sectors.slice(-1)[0].Segments;
 
-    const sessionInactive = sessionStatus === "Inactive" || sessionStatus === "Finished";
+    const sessionInactive =
+        sessionStatus === "Inactive" || sessionStatus === "Finished";
 
     // Detect if grid start during inactive (formation lap) during a 'Race' session
     // If the final to last mini sector has a value (is not 0). Check if the session is 'Inactive' and if the session type is 'Race'
-    if (lastSectorSegments.slice(-2, -1)[0].Status !== 0 && sessionInactive && !timingData[racingNumber].PitOut) {
+    if (
+        lastSectorSegments.slice(-2, -1)[0].Status !== 0 &&
+        sessionInactive &&
+        !timingData[racingNumber].PitOut
+    ) {
         console.log(racingNumber + " is lining up for a race start");
         return true;
     }
@@ -136,7 +145,9 @@ function overwriteCrashedStatus(racingNumber: string) {
     if (
         sessionType === "Race" &&
         sessionStatus === "Finished" &&
-        lastSectorSegments.some((segment: {Status:number}) => segment.Status !== 0)
+        lastSectorSegments.some(
+            (segment: { Status: number }) => segment.Status !== 0
+        )
     ) {
         console.log(racingNumber + " is in parc ferme");
         return true;

@@ -38,7 +38,7 @@ async function apiRequests() {
 }
 
 // A lap or sector time can be send through and will return as a number in seconds
-function parseLapOrSectorTime(time: string) {
+export function parseLapOrSectorTime(time: string) {
     // Split the input into 3 variables by checking if there is a : or a . in the time. Then replace any starting 0's by nothing and convert them to numbers using parseInt.
     const [minutes, seconds, milliseconds] = time
         .split(/[:.]/)
@@ -52,7 +52,7 @@ function parseLapOrSectorTime(time: string) {
 }
 
 // Check if the driver is on a push lap or not
-function isDriverOnPushLap(driverNumber: string) {
+export function isDriverOnPushLap(driverNumber: string) {
     if (sessionStatus === "Aborted") return false;
     const driverTimingData = timingData[driverNumber];
     const driverBestTimes = bestTimes[driverNumber];
