@@ -9,6 +9,7 @@ import {
     TrackStatus_Def,
 } from "./npm_f1mv_api";
 import { TeamColors } from "./colors";
+import blip from "./blips/blip.png";
 import { driverHasCrashed } from "./detection/crash_detection";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const d3 = require("d3");
@@ -24,6 +25,8 @@ export async function generateDrivers(config: Config, svg: any) {
         .attr("id", "cars")
         .attr("style", "transform: scale(1, -1)");
 
+    const defs = svg.append("defs");
+
     for (const key in DriverList) {
         const driver: DriverList = DriverList[key];
 
@@ -37,6 +40,21 @@ export async function generateDrivers(config: Config, svg: any) {
             .attr("width", 590)
             .attr("height", 590);
 
+        const patern = defs
+        .append("pattern")
+        .attr("id", `image${driver.Tla}`)
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("height", "1")
+        .attr("width", "1")
+        .attr("patternUnits", "objectBoundingBox");
+
+        patern
+            .append("image")
+            .attr("x", -15)
+            .attr("y", 0)
+            .attr("xlink:href", blip);
+
         car_svg
             .append("circle")
             .attr("id", `circle${driver.Tla}`)
@@ -44,7 +62,14 @@ export async function generateDrivers(config: Config, svg: any) {
             .attr("cy", 0)
             .attr("r", 7.5)
             .attr("fill", `#${TeamColors[driver.TeamName]}`);
-        // .attr("style", "background-image: url(/blips/blip.png);");
+
+        // .attr("fill", `url(#image${driver.Tla})`);
+        // .attr("style", "background-image: url(./blips/blip.png);");
+
+        // car_svg
+        //     .append("img")
+        //     .attr("id", `circle${driver.Tla}`)
+        //     .attr("src", "/blips/blip.png");
 
         car_svg
             .append("text")
@@ -229,7 +254,10 @@ export async function ringManagment(config: Config) {
                         "crashed blink"
                 );
             } else {
-                d3.select(`#circle${driverInList.Tla}`).attr("class", d3.select(`#circle${driverInList.Tla}`).attr("class") + "");
+                d3.select(`#circle${driverInList.Tla}`).attr(
+                    "class",
+                    d3.select(`#circle${driverInList.Tla}`).attr("class") + ""
+                );
             }
         } else {
             if (await driverHasCrashed(key, config)) {
