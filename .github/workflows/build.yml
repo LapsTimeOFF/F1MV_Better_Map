@@ -4,8 +4,7 @@ on:
   push:
     branches: ['*']
     paths:
-      - 'src/*'
-      - 'src/**/*'
+      - '*.ts'
       - 'package.json'
 
 concurrency:
