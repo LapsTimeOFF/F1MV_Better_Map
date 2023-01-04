@@ -51,6 +51,11 @@ html {
     stroke-width: 2;
 }
 
+.crashed {
+    stroke: red;
+    stroke-width: 2;
+}
+
 .blink {
     animation: blink 0.5s linear infinite;
 }

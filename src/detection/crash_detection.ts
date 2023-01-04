@@ -5,7 +5,6 @@ import {
     LiveTimingAPIGraphQL,
 } from "../npm_f1mv_api";
 
-let driverList: any;
 let carData: any;
 let timingData: any;
 let sessionStatus: any;
@@ -14,14 +13,8 @@ let sessionType: any;
 let trackStatus: any;
 let lapCount: any;
 
-async function apiRequests() {
-    const config: Config = {
-        host: "localhost",
-        port: (await discoverF1MVInstances("localhost")).port,
-    };
-
+export async function apiRequests(config: Config) {
     const liveTimingState = await LiveTimingAPIGraphQL(config, [
-        "DriverList",
         "CarData",
         "TimingData",
         "SessionStatus",
@@ -29,7 +22,6 @@ async function apiRequests() {
         "TrackStatus",
         "LapCount",
     ]);
-    driverList = liveTimingState.DriverList;
     carData = liveTimingState.CarData.Entries;
     timingData = liveTimingState.TimingData.Lines;
     sessionStatus = liveTimingState.SessionStatus.Status;
@@ -41,7 +33,8 @@ async function apiRequests() {
     }
 }
 
-export function driverHasCrashed(driverNumber: string) {
+export async function driverHasCrashed(driverNumber: string, config: Config) {
+    await apiRequests(config);
     const driverCarData = getCarData(driverNumber);
 
     if (!weirdCarBehaviour(driverCarData, driverNumber)) return false;

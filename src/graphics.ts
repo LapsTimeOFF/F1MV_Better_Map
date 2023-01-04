@@ -9,6 +9,7 @@ import {
     TrackStatus_Def,
 } from "./npm_f1mv_api";
 import { TeamColors } from "./colors";
+import { driverHasCrashed } from "./detection/crash_detection";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const d3 = require("d3");
 
@@ -43,7 +44,7 @@ export async function generateDrivers(config: Config, svg: any) {
             .attr("cy", 0)
             .attr("r", 7.5)
             .attr("fill", `#${TeamColors[driver.TeamName]}`);
-            // .attr("style", "background-image: url(/blips/blip.png);");
+        // .attr("style", "background-image: url(/blips/blip.png);");
 
         car_svg
             .append("text")
@@ -172,48 +173,70 @@ export async function ringManagment(config: Config) {
             "TimingData",
             "DriverList",
             "RaceControlMessages",
-            "SessionInfo"
+            "SessionInfo",
         ]);
 
-    if(SessionInfo.Type !== 'Race') return;
-    
     for (const key in TimingData.Lines) {
         const driverInData: Driver_TimingData = TimingData.Lines[key];
         const driverInList: DriverList = DriverList[key];
-        const lapped = driverInData.GapToLeader.endsWith("L");
 
-        if (lapped) {
-            d3.select(`#circle${driverInList.Tla}`).attr("class", "lapped");
-            for (let _i = 0; _i < 4; _i++) {
-                const message: RaceControlMessage =
-                    RaceControlMessages.Messages[
-                        RaceControlMessages.Messages.length - (1 + _i)
-                    ];
-
-                if (
-                    message.Message.includes(
-                        "LAPPED CARS MAY NOW OVERTAKE THE SAFETY CAR"
-                    )
-                ) {
-                    const messageArray = message.Message.split(":");
-                    const allowedDriversToOvertake = messageArray[1].split(",");
+        if (SessionInfo.Type === "Race") {
+            const lapped = driverInData.GapToLeader.endsWith("L");
+            if (lapped) {
+                d3.select(`#circle${driverInList.Tla}`).attr("class", "lapped");
+                for (let _i = 0; _i < 4; _i++) {
+                    const message: RaceControlMessage =
+                        RaceControlMessages.Messages[
+                            RaceControlMessages.Messages.length - (1 + _i)
+                        ];
 
                     if (
-                        allowedDriversToOvertake.includes(
-                            ` ${driverInList.RacingNumber}`
+                        message.Message.includes(
+                            "LAPPED CARS MAY NOW OVERTAKE THE SAFETY CAR"
                         )
                     ) {
-                        d3.select(`#circle${driverInList.Tla}`).attr(
-                            "class",
-                            "lapped blink"
-                        );
+                        const messageArray = message.Message.split(":");
+                        const allowedDriversToOvertake =
+                            messageArray[1].split(",");
+
+                        if (
+                            allowedDriversToOvertake.includes(
+                                ` ${driverInList.RacingNumber}`
+                            )
+                        ) {
+                            d3.select(`#circle${driverInList.Tla}`).attr(
+                                "class",
+                                "lapped blink"
+                            );
+                        }
                     }
+                    break;
                 }
-                break;
+            } else {
+                if (driverInData.Line === 1) {
+                    d3.select(`#circle${driverInList.Tla}`).attr(
+                        "class",
+                        "first"
+                    );
+                } else {
+                    d3.select(`#circle${driverInList.Tla}`).attr("class", "");
+                }
+            }
+            if (await driverHasCrashed(key, config)) {
+                d3.select(`#circle${driverInList.Tla}`).attr(
+                    "class",
+                    d3.select(`#circle${driverInList.Tla}`).attr("class") +
+                        "crashed blink"
+                );
+            } else {
+                d3.select(`#circle${driverInList.Tla}`).attr("class", d3.select(`#circle${driverInList.Tla}`).attr("class") + "");
             }
         } else {
-            if (driverInData.Line === 1) {
-                d3.select(`#circle${driverInList.Tla}`).attr("class", "first");
+            if (await driverHasCrashed(key, config)) {
+                d3.select(`#circle${driverInList.Tla}`).attr(
+                    "class",
+                    "crashed blink"
+                );
             } else {
                 d3.select(`#circle${driverInList.Tla}`).attr("class", "");
             }

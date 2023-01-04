@@ -5,7 +5,6 @@ import {
     discoverF1MVInstances,
 } from "../npm_f1mv_api";
 
-let driverList: any;
 let timingData: any;
 let bestTimes: any;
 let sessionInfo: any;
@@ -13,14 +12,8 @@ let sessionType: any;
 let sessionStatus: any;
 
 // All the api requests
-async function apiRequests() {
-    const config: Config = {
-        host: "localhost",
-        port: (await discoverF1MVInstances("localhost")).port,
-    };
-
+export async function apiRequests(config: Config) {
     const liveTimingState = await LiveTimingAPIGraphQL(config, [
-        "DriverList",
         "TimingAppData",
         "TimingData",
         "TimingStats",
@@ -29,7 +22,6 @@ async function apiRequests() {
         "SessionStatus",
     ]);
 
-    driverList = liveTimingState.DriverList;
     timingData = liveTimingState.TimingData.Lines;
     bestTimes = liveTimingState.TimingStats.Lines;
     sessionInfo = liveTimingState.SessionInfo;
@@ -52,7 +44,8 @@ export function parseLapOrSectorTime(time: string) {
 }
 
 // Check if the driver is on a push lap or not
-export function isDriverOnPushLap(driverNumber: string) {
+export async function isDriverOnPushLap(driverNumber: string, config: Config) {
+    await apiRequests(config);
     if (sessionStatus === "Aborted") return false;
     const driverTimingData = timingData[driverNumber];
     const driverBestTimes = bestTimes[driverNumber];
