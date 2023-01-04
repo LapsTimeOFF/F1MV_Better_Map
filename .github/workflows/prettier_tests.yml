@@ -69,6 +69,8 @@ jobs:
       - name: Format the files
         run: npx -y prettier --write ./src/**/*.ts
 
+      - run: git config --global user.email "39061148+LapsTimeOFF@users.noreply.github.com"
+      - run: git config --global user.name "LapsTimeOFF"
       - run: git remote set-url origin https://lapstimeoff:${{ secrets.GITHUB_TOKEN }}@github.com/lapstimeoff/f1mv_better_map.git
       - run: git add .
       - run: git commit -m "Prettier edits"
