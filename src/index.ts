@@ -8,8 +8,7 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (process.env.npm_package_name)
-    if (require("electron-squirrel-startup")) 
-        app.quit();
+    if (require("electron-squirrel-startup")) app.quit();
 
 import * as Sentry from "@sentry/electron/main";
 
@@ -35,7 +34,7 @@ const createWindow = (): void => {
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
-}; 
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

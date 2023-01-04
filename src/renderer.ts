@@ -39,7 +39,6 @@ const d3 = require("d3");
 import * as Sentry from "@sentry/electron";
 
 (async () => {
-
     Sentry.init({
         dsn: "https://54929c18168e4ba8b17993f0faa2313e@o4504430679883776.ingest.sentry.io/4504430682898432",
     });
@@ -74,7 +73,7 @@ import * as Sentry from "@sentry/electron";
     // Update drivers postition
     await updatePosition(config);
     setInterval(() => updatePosition(config), 800);
-    
+
     await ringManagment(config);
     setInterval(() => ringManagment(config), 800);
 })();

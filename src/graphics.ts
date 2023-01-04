@@ -43,13 +43,13 @@ export async function generateDrivers(config: Config, svg: any) {
             .attr("height", 590);
 
         const patern = defs
-        .append("pattern")
-        .attr("id", `image${driver.Tla}`)
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("height", "1")
-        .attr("width", "1")
-        .attr("patternUnits", "objectBoundingBox");
+            .append("pattern")
+            .attr("id", `image${driver.Tla}`)
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("height", "1")
+            .attr("width", "1")
+            .attr("patternUnits", "objectBoundingBox");
 
         patern
             .append("image")
