@@ -75,6 +75,6 @@ jobs:
       - run: git remote set-url origin https://lapstimeoff:${{ secrets.GITHUB_TOKEN }}@github.com/lapstimeoff/f1mv_better_map.git
       - run: git add .
       - run: git commit -m "Prettier edits"
-      - run: git push origin HEAD:stable
+      - run: git push origin HEAD:${{ secrets.GITHUB_REF }}
     needs: checking-format
     if: ${{ failure() }}
