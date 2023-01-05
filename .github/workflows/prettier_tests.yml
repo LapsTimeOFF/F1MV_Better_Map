@@ -1,6 +1,7 @@
 name: Verify if the files are properlly formated
 
 on:
+    workflow_dispatch:
     push:
         branches: ["*"]
 
